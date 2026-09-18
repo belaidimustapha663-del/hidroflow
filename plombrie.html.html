@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HydroFlow | Plumbing & Heating Services</title>
+  <style>
+    :root {
+      --primary-blue: #0056b3;
+      --accent-blue: #0088ff;
+      --light-blue: #eef6ff;
+      --dark-blue: #0a2540;
+      --white: #ffffff;
+      --gray: #f4f7f9;
+      --text-dark: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--gray);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--dark-blue);
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--accent-blue);
+    }
+
+    .lang-btn {
+      background-color: var(--primary-blue);
+      color: var(--white);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .lang-btn:hover {
+      background-color: var(--accent-blue);
+    }
+
+    /* Page Sections */
+    .page {
+      display: none;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 1rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Boss / Founder Biography Section */
+    .boss-section {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border: 1px solid var(--light-blue);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .boss-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary-blue);
+      flex-shrink: 0;
+    }
+
+    .boss-info h2 {
+      color: var(--primary-blue);
+      margin-bottom: 0.2rem;
+    }
+
+    .boss-info h4 {
+      color: var(--accent-blue);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    /* Gallery Grid */
+    .section-title {
+      text-align: center;
+      color: var(--primary-blue);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      border: 1px solid var(--light-blue);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-top: 3rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .contact-item {
+      padding: 1rem;
+      background: var(--light-blue);
+      border-radius: 8px;
+    }
+
+    .contact-item a {
+      color: var(--primary-blue);
+      text-decoration: none;
+      font-weight: bold;
+      word-break: break-all;
+    }
+
+    /* Form Page */
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--white);
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-top: 5px solid var(--primary-blue);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--dark-blue);
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 5px rgba(0,136,255,0.3);
+    }
+
+    .transport-note {
+      font-size: 0.9rem;
+      color: #555;
+      background: var(--light-blue);
+      padding: 0.8rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--primary-blue);
+    }
+
+    [dir="rtl"] .transport-note {
+      border-left: none;
+      border-right: 4px solid var(--primary-blue);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--primary-blue);
+      color: var(--white);
+      padding: 1rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-blue);
+    }
+
+    /* Responsive Mobile Design */
+    @media (max-width: 768px) {
+      .boss-section {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* RTL Support */
+    [dir="rtl"] {
+      text-align: right;
+    }
+
+    [dir="rtl"] .hero, [dir="rtl"] .section-title, [dir="rtl"] .contact-grid, [dir="rtl"] .boss-section {
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      [dir="rtl"] .boss-section {
+        text-align: center;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: var(--dark-blue);
+      color: var(--white);
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">🚰 HydroFlow</div>
+      <nav>
+        <a id="nav-portfolio" class="active" onclick="showPage('portfolio-page')">
+          <span class="lang-en">Portfolio</span>
+          <span class="lang-fr" style="display:none;">Portfolio</span>
+          <span class="lang-ar" style="display:none;">معرض الأعمال</span>
+        </a>
+        <a id="nav-form" onclick="showPage('form-page')">
+          <span class="lang-en">Request Form</span>
+          <span class="lang-fr" style="display:none;">Demande</span>
+          <span class="lang-ar" style="display:none;">طلب خدمة</span>
+        </a>
+        <button class="lang-btn" onclick="toggleLanguage()">Français</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PAGE 1: Portfolio, Bio & Contacts -->
+  <main id="portfolio-page" class="page active">
+    
+    <!-- Hero Banner -->
+    <div class="hero">
+      <h1 class="lang-en">Professional Plumbing & Heating Services</h1>
+      <h1 class="lang-fr" style="display:none;">Services Professionnels de Plomberie et Chauffage</h1>
+      <h1 class="lang-ar" style="display:none;">خدمات السباكة والتدفئة الاحترافية</h1>
+      <p class="lang-en">Quality work, guaranteed satisfaction, and 24/7 reliability.</p>
+      <p class="lang-fr" style="display:none;">Travail de qualité, satisfaction garantie et fiabilité 24h/24 et 7j/7.</p>
+      <p class="lang-ar" style="display:none;">جودة عالية، رضا مضمون، وخدمة على مدار الساعة.</p>
+    </div>
+
+    <!-- Founder Biography Section -->
+    <div class="boss-section">
+      <img src="https://via.placeholder.com/180" alt="Father's Photo" class="boss-img">
+      <div class="boss-info">
+        <h2>
+          <span class="lang-en">Belaidi Mustapha</span>
+          <span class="lang-fr" style="display:none;">Mustapha belaidi</span>
+          <span class="lang-ar" style="display:none;">مصطفى بلعيدي</span>
+        </h2>
+        <h4>
+          <span class="lang-en">Founder & Lead Master Plumber</span>
+          <span class="lang-fr" style="display:none;">Fondateur et Maître Plombier Principal</span>
+          <span class="lang-ar" style="display:none;">المؤسس وخبير السباكة والتدفئة</span>
+        </h4>
+        <p class="lang-en">
+          With over "35 years of experience in professional plumbing and heating solutions, belaidi Mustapha leads our family business with commitment, precision, and dedication to excellence. Every project is inspected and approved under his direct supervision to ensure top service quality for your home.
+        </p>
+        <p class="lang-fr" style="display:none;">
+          Fort de plus de 35 ans d'expérience dans les solutions professionnelles de plomberie et de chauffage, Belaidi Mustapha dirige notre entreprise familiale avec engagement, précision et un dévouement total à l'excellence. Chaque projet est inspecté et approuvé sous sa supervision directe.
+        </p>
+        <p class="lang-ar" style="display:none;">
+          مع أكثر من 35 سنة من الخبرة في حلول السباكة والتدفئة الاحترافية، يقودمصطفى بلعيدي عملنا العائلي بالتزام ودقة واهتمام تام بالتميز. يتم إشراف وتفقد كل مشروع تحت قيادته المباشرة لضمان أفضل جودة خدمة لمنزلك.
+        </p>
+      </div>
+    </div>
+
+    <h2 class="section-title">
+      <span class="lang-en">Our Previous Work</span>
+      <span class="lang-fr" style="display:none;">Nos Travaux Précédents</span>
+      <span class="lang-ar" style="display:none;">أعمالنا السابقة</span>
+    </h2>
+
+    <!-- Photo Gallery Grid -->
+    <div class="gallery-grid">
+      <div class="card">
+        <img src="photos/Gemini_Generated_Image_yruslsyruslsyrus.jfif" alt="Bathroom Plumbing">
+        <img src="photos/20250813_125639.jpg" alt="Bathroom Plumbing">
+        <div class="card-body">
+          <h3 class="lang-en">Bathroom Installation</h3>
+          <h3 class="lang-fr" style="display:none;">Installation de Salle de Bains</h3>
+          <h3 class="lang-ar" style="display:none;">تركيب حمام كامل</h3>
+        </div>
+      </div>
+      <div class="card">
+        <img src="photos/20251030_115629.jpg" alt="Heating Boiler">
+        <img src="photos/Gemini_Generated_Image_s66w4rs66w4rs66w.jfif" alt="Heating Boiler">
+        <div class="card-body">
+          <h3 class="lang-en">Central Heating System</h3>
+          <h3 class="lang-fr" style="display:none;">Système de Chauffage Central</h3>
+          <h3 class="lang-ar" style="display:none;">نظام التدفئة المركزية</h3>
+        </div>
+      </div>
+      <div class="card">
+        <img src="photos/photo_5864165608444858506_y.jpg" alt="Pipe Maintenance">
+<img src="photos/Gemini_Generated_Image_sdt416sdt416sdt4.jfif" alt="Pipe Maintenance">
+        <div class="card-body">
+          <h3 class="lang-en">Pipe Repair & Leak Fixing</h3>
+          <h3 class="lang-fr" style="display:none;">Réparation de Tuyaux et Fuites</h3>
+          <h3 class="lang-ar" style="display:none;">إصلاح الأنابيب والتسريبات</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact & Socials -->
+    <div class="contact-section">
+      <h2 class="section-title" style="margin-bottom: 1rem;">
+        <span class="lang-en">Contact Us</span>
+        <span class="lang-fr" style="display:none;">Contactez-nous</span>
+        <span class="lang-ar" style="display:none;">اتصل بنا</span>
+      </h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <p><strong>📞 <span class="lang-en">Phone</span><span class="lang-fr" style="display:none;">Téléphone</span><span class="lang-ar" style="display:none;">الهاتف</span></strong></p>
+          <a href="tel:0549356895">0549356895</a>
+        </div>
+        <div class="contact-item">
+          <p><strong>✉️ <span class="lang-en">Email</span><span class="lang-fr" style="display:none;">E-mail</span><span class="lang-ar" style="display:none;">البريد الإلكتروني</span></strong></p>
+          <a href="belaidimehdi964@gmail.com">belaidimehdi964@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <p><strong>📷 Instagram</strong></p>
+          <a href="https://www.instagram.com/agh1l_es.bld/?__pwa=1#">agh1l_es.bld</a>
+        </div>
+        <div class="contact-item">
+          <p><strong>🌐 Facebook</strong></p>
+          <a href="Mehdi Belaidi" target="_blank">Mehdi Belaidi</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- PAGE 2: Working Email Form -->
+  <main id="form-page" class="page">
+    <div class="form-container">
+      <h2 class="section-title">
+        <span class="lang-en">Service Request Form</span>
+        <span class="lang-fr" style="display:none;">Formulaire de Demande</span>
+        <span class="lang-ar" style="display:none;">استمارة طلب الخدمة</span>
+      </h2>
+      
+      <!-- Transport Notice Clarification -->
+      <div class="transport-note">
+        <span class="lang-en">🚗 <strong>Transport Policy:</strong> We primarily operate in Algiers and Blida (transport is on us). For locations further away like Medea or Tipaza, transport costs will be charged to the client.</span>
+        <span class="lang-fr" style="display:none;">🚗 <strong>Politique de transport :</strong> Nous intervenons principalement à Alger et Blida (transport à notre charge). Pour les zones plus éloignées comme Médéa ou Tipaza, les frais de transport sont à la charge du client.</span>
+        <span class="lang-ar" style="display:none;">🚗 <strong>سياسة النقل:</strong> نعمل بشكل أساسي في الجزائر العاصمة وبليدة (التنقل علينا). أما بالنسبة للمناطق الأبعد مثل المدية أو تيبازة، فتكون مصاريف التنقل على الزبون.</span>
+      </div>
+
+      <!-- REPLACE 'YOUR_EMAIL@GMAIL.COM' WITH YOUR REAL EMAIL BELOW -->
+      <form action="https://formsubmit.co/belaidimehdi964@gmail.COM" method="POST">
+        
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+
+        <div class="form-group">
+          <label for="name">
+            <span class="lang-en">Full Name</span>
+            <span class="lang-fr" style="display:none;">Nom complet</span>
+            <span class="lang-ar" style="display:none;">الاسم الكامل</span>
+          </label>
+          <input type="text" id="name" name="Client_Name" required placeholder="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">
+            <span class="lang-en">Phone Number</span>
+            <span class="lang-fr" style="display:none;">Numéro de téléphone</span>
+            <span class="lang-ar" style="display:none;">رقم الهاتف</span>
+          </label>
+          <input type="tel" id="phone" name="Phone_Number" required placeholder="+1234567890">
+        </div>
+
+        <div class="form-group">
+          <label for="place">
+            <span class="lang-en">Place / Location (Wilaya)</span>
+            <span class="lang-fr" style="display:none;">Lieu / Wilaya</span>
+            <span class="lang-ar" style="display:none;">المكان / الولاية</span>
+          </label>
+          <select id="place" name="Service_Location" required>
+            <option value="Algiers">Algiers / الجزائر العاصمة (Free Transport)</option>
+            <option value="Blida">Blida / البليدة (Free Transport)</option>
+            <option value="Tipaza">Tipaza / تيبازة (Transport fee applies)</option>
+            <option value="Medea">Medea / المدية (Transport fee applies)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="service">
+            <span class="lang-en">Select Service</span>
+            <span class="lang-fr" style="display:none;">Sélectionner le service</span>
+            <span class="lang-ar" style="display:none;">اختر الخدمة</span>
+          </label>
+          <select id="service" name="Requested_Service" required>
+            <option value="Plumbing">Plumbing / Plomberie / سباكة</option>
+            <option value="Heating">Heating / Chauffage / تدفئة</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span class="lang-en">Submit Request</span>
+          <span class="lang-fr" style="display:none;">Envoyer la demande</span>
+          <span class="lang-ar" style="display:none;">إرسال الطلب</span>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 HydroFlow Plumbing & Heating. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // 0: English, 1: French, 2: Arabic
+    let langIndex = 0;
+    const languages = ['en', 'fr', 'ar'];
+    const buttonLabels = {
+      en: 'Français',
+      fr: 'العربية',
+      ar: 'English'
+    };
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+      
+      document.getElementById(pageId).classList.add('active');
+      if(pageId === 'portfolio-page') document.getElementById('nav-portfolio').classList.add('active');
+      if(pageId === 'form-page') document.getElementById('nav-form').classList.add('active');
+    }
+
+    function toggleLanguage() {
+      langIndex = (langIndex + 1) % languages.length;
+      const currentLang = languages[langIndex];
+      const html = document.documentElement;
+      const langBtn = document.querySelector('.lang-btn');
+
+      // Hide all language spans first
+      document.querySelectorAll('.lang-en, .lang-fr, .lang-ar').forEach(el => el.style.display = 'none');
+
+      // Show current language spans
+      document.querySelectorAll(`.lang-${currentLang}`).forEach(el => {
+        el.style.display = currentLang === 'ar' ? 'inline-block' : 'inline';
+      });
+
+      // Handle RTL or LTR layout
+      if (currentLang === 'ar') {
+        html.setAttribute('dir', 'rtl');
+        html.setAttribute('lang', 'ar');
+      } else {
+        html.setAttribute('dir', 'ltr');
+        html.setAttribute('lang', currentLang);
+      }
+
+      // Update button text to point to the next language option
+      langBtn.textContent = buttonLabels[currentLang];
+    }
+  </script>
+</body>
+</html>
